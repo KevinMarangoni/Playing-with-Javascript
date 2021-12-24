@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html> 
+<head> <meta charset = "UTF-8"></head>>
+    <script>
+        function existsOnFibonacci(num) {
+  let i;
+  let a = [];
+
+  a[0] = 0;
+  a[1] = 1;
+
+  for (i = 2; i <= num; i++) {
+    a[i] = a[i - 2] + a[i - 1]
+  }
+  
+  return a.includes(num)
+
+}
+    const num = prompt("Insira o número: ")
+    const result = existsOnFibonacci(Number(num))
+    if (result){
+        alert("O número "+num+" existe na sequência")
+    }
+    else{
+        alert("O número "+num+" não existe na sequência")
+    }
+    </script>
+    </html>
