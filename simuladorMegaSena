@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMULADOR DE MEGASENA!</title>
+</head>
+
+<body>
+    <script>
+        //Este código eu fiz a algum tempo, antes de dominar o uso de functions. Pretendo reescreve-lo, atualizando com meu conhecimento atual.
+        var sorteio = []
+        var megasena = []
+        var contArray = 0
+        var resp
+        var jogados = []
+        var jogadosNumeric = []
+
+        //essa parte pede para o usuário inserir os números que deseja jogar na megasena, fazendo a verificação se a entrada está entre 1 e 60 e prevenindo a entrada de dados que não sejam números inteiros
+
+        for (var a = 0; a < 6; a++) {
+            var jogadoAnt = parseInt((prompt("Digite os números que deseja jogar na megasena")))
+            if (jogadoAnt > 0 && jogadoAnt <= 60 && isNaN(jogadoAnt) == false) {
+                if (jogados.includes(jogadoAnt) == false) {
+                    jogados.push(jogadoAnt)
+                }
+                else if (jogados.includes(jogadoAnt) == true) {
+                    alert("VOCÊ JA DIGITOU ESSE NUMERO ANTES\nDIGITE NÚMEROS QUE NÃO SEJAM REPETIDOS")
+                    a--
+                }
+            }
+            else {
+                alert("Digite APENAS NÚMEROS entre 1 e 60")
+                a--
+            }
+
+        }
+
+
+        //código que sorteia os números e insere esses valores dentro da array
+        for (var i = 0; contArray < 6; i++) {
+            var num = parseInt(Math.random() * 100)
+            if (num <= 60 && num > 0 && sorteio.includes(num) == false) {
+                sorteio.push(num)
+                contArray++
+            } else { }
+        }
+
+        //essa parte do código irá organizar a array em ordem numérica
+
+        megasena.push(sorteio.sort((a, b) => a - b))
+        jogadosNumeric.push(jogados.sort((a, b) => a - b))
+
+
+        //essa parte do código irá comparar os números inseridos pelo jogador, dizendo quantos numeros ele acertou, se fez quadra, quina ou sena
+        var conSort = 0
+        var conJog = 0
+        var cont = 0
+        mensagem = ""
+
+        for (let b = 0; b < sorteio.length; b++) {
+            for (let c = 0; c < jogados.length; c++) {
+                conSort = parseInt(sorteio[b])
+                conJog = parseInt(jogados[c])
+                if (conSort == conJog) {
+                    cont++
+                }
+            }
+
+        }
+        if (cont == 0)
+            mensagem = "Você não acertou nenhum número, que pena :C"
+        else if (cont == 1)
+            mensagem = "Você acertou apenas um dos números"
+        else if (cont == 2)
+            mensagem = "Opa! Você acertou 2 números, com um pouco mais de sorte..."
+        else if (cont == 3)
+            mensagem = "Você acertou três números, você é muito sortudo e azarado ao mesmo tempo..."
+        else if (cont == 4)
+            mensagem = "QUADRA!"
+        else if (cont == 5)
+            mensagem = "QUINA, RETIRE SEU PRÊMIO!!"
+        else if (cont == 6)
+            mensagem = "SENA!!!!!! VOCÊ GANHOU!"
+
+        alert("Esses são os números sorteados da megasena: " + megasena + "\nEsses foram os números jogados por você: " + jogadosNumeric + "\n" + mensagem)
+
+//fim
+    </script>
+
+</body>
+
+</html>
