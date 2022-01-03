@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testador de Palíndromos</title>
+</head>
+
+<body>
+    <script>
+        //este script foi desenvolvido para rodar no console.
+        //essa function irá definir o escopo de geração e o tamanho das palavras
+        function randomNumber(min, max) {
+            return parseInt(Math.random() * ((max + 1) - min) + min)
+        }
+        //essa function será responsável por testar cada palavra produzida, verificando se ela é ou não um palíndromo
+        function isPalindrome(word) {
+            return word == word.split("").reverse().join("")
+        }
+        // está irá construir as palavras
+        function randomText() {
+            let letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+            let random = ""
+            let wordLength = randomNumber(3, 5)
+            for (let a = 0; a < wordLength; a++) {
+                let randomIndex = randomNumber(0, letters.length - 1)
+                random += letters[randomIndex]
+            }
+            return random
+        }
+        // esta parte do script irá "chamar" o resultado da interação das functions acima, gerando as palavras aleatoriamente, escolhi por 10000 palavras.
+        var palindromeCounter = 0
+        var allWords = []
+        for (let i = 0; i < 10000; i++) {
+            allWords.push(randomText())
+            //console.log(randomText())
+            //caso queira visualizar a geração das palavras, basta remover as barras da linha acima.
+        }
+        // essa parte será responsável por contabilizar cada palavra gerada que seja um palíndromo
+        allWords.forEach(function (el) {
+            if (isPalindrome(el)) {
+                palindromeCounter++
+            }
+        })
+        console.log(palindromeCounter)
+        //obrigado :D
+    </script>
+
+</body>
+
+</html>
